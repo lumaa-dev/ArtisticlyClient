@@ -1,5 +1,5 @@
 //Made by Lumaa
-
+#if DEBUG
 import SwiftUI
 
 struct DemoView: View {
@@ -33,7 +33,7 @@ struct DemoView: View {
                     MusicManager.shared.setNowPlayingInfo(with: playing!)
                 }
             } label: {
-                Text("Play mp3")
+                Text(String("Play mp3"))
             }
             
             Button {
@@ -44,7 +44,7 @@ struct DemoView: View {
                     MusicManager.shared.setNowPlayingInfo(with: playing!)
                 }
             } label: {
-                Text("Play wav")
+                Text(String("Play wav"))
             }
             
             Button {
@@ -55,7 +55,7 @@ struct DemoView: View {
                     MusicManager.shared.setNowPlayingInfo(with: playing!)
                 }
             } label: {
-                Text("Play m4a (metadata)")
+                Text(String("Play m4a (metadata)"))
             }
             
             HStack {
@@ -93,3 +93,4 @@ struct DemoView: View {
         .padding()
     }
 }
+#endif
