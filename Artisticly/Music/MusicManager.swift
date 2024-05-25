@@ -3,6 +3,7 @@
 import Foundation
 import AVFoundation
 import CoreServices
+import MediaPlayer
 
 @Observable
 final class MusicManager {
@@ -22,10 +23,24 @@ final class MusicManager {
             self.addTime(newValue)
         }
     }
+    var maxTime: TimeInterval {
+        get {
+            self.player.duration
+        }
+    }
+    var volume: Float {
+        get {
+            self.player.volume
+        }
+        set {
+            self.player.setVolume(newValue, fadeDuration: 0)
+        }
+    }
     
     init() {
         player = AVAudioPlayer()
         player.prepareToPlay()
+        player.setVolume(2.0, fadeDuration: 0.1)
     }
     
     func getDetails() async -> SongDetails {
@@ -86,6 +101,16 @@ final class MusicManager {
         }
     }
     
+    func pause() {
+        player.pause()
+        isPlaying = false
+    }
+    
+    func play() {
+        player.play()
+        isPlaying = true
+    }
+    
     /// Toggles on or off the "pause" feature accordingly
     func smartPause() {
          if player.isPlaying {
@@ -103,7 +128,7 @@ final class MusicManager {
         isPlaying = false
         buffering = true
         
-        player.currentTime += time
+        player.currentTime = time
         player.play()
         
         isPlaying = true

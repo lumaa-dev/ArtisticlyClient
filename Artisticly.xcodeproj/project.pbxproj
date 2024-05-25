@@ -12,6 +12,8 @@
 		B9C341382C01A6A100A59B25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C341372C01A6A100A59B25 /* Assets.xcassets */; };
 		B9C3413B2C01A6A100A59B25 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C3413A2C01A6A100A59B25 /* Preview Assets.xcassets */; };
 		B9C341422C01A7A000A59B25 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341412C01A7A000A59B25 /* MusicManager.swift */; };
+		B9C341452C01CE4200A59B25 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341442C01CE4200A59B25 /* NowPlaying.swift */; };
+		B9C341482C01E2B600A59B25 /* AirPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341472C01E2B600A59B25 /* AirPlayButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,10 @@
 		B9C341372C01A6A100A59B25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9C3413A2C01A6A100A59B25 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B9C341412C01A7A000A59B25 /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
+		B9C341432C01CDCE00A59B25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B9C341442C01CE4200A59B25 /* NowPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlaying.swift; sourceTree = "<group>"; };
+		B9C341462C01DF0400A59B25 /* Artisticly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Artisticly.entitlements; sourceTree = "<group>"; };
+		B9C341472C01E2B600A59B25 /* AirPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlayButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,11 +59,14 @@
 		B9C341322C01A69D00A59B25 /* Artisticly */ = {
 			isa = PBXGroup;
 			children = (
+				B9C3414A2C01ED4300A59B25 /* Components */,
+				B9C341492C01ED3800A59B25 /* Music */,
+				B9C341462C01DF0400A59B25 /* Artisticly.entitlements */,
+				B9C341432C01CDCE00A59B25 /* Info.plist */,
 				B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */,
 				B9C341352C01A69D00A59B25 /* ContentView.swift */,
 				B9C341372C01A6A100A59B25 /* Assets.xcassets */,
 				B9C341392C01A6A100A59B25 /* Preview Content */,
-				B9C341412C01A7A000A59B25 /* MusicManager.swift */,
 			);
 			path = Artisticly;
 			sourceTree = "<group>";
@@ -68,6 +77,23 @@
 				B9C3413A2C01A6A100A59B25 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B9C341492C01ED3800A59B25 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				B9C341412C01A7A000A59B25 /* MusicManager.swift */,
+				B9C341442C01CE4200A59B25 /* NowPlaying.swift */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		B9C3414A2C01ED4300A59B25 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B9C341472C01E2B600A59B25 /* AirPlayButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,8 +167,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9C341362C01A69D00A59B25 /* ContentView.swift in Sources */,
+				B9C341482C01E2B600A59B25 /* AirPlayButton.swift in Sources */,
 				B9C341342C01A69D00A59B25 /* ArtisticlyApp.swift in Sources */,
 				B9C341422C01A7A000A59B25 /* MusicManager.swift in Sources */,
+				B9C341452C01CE4200A59B25 /* NowPlaying.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -258,7 +286,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -273,12 +301,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Artisticly/Artisticly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Artisticly/Preview Content\"";
 				DEVELOPMENT_TEAM = HB5P3BML86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Artisticly/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Artisticly;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -309,12 +339,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Artisticly/Artisticly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Artisticly/Preview Content\"";
 				DEVELOPMENT_TEAM = HB5P3BML86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Artisticly/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Artisticly;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
