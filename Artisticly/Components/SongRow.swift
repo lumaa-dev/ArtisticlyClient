@@ -16,7 +16,7 @@ struct SongRow: View {
                     .foregroundStyle(Color.gray.opacity(0.5))
                     .font(.system(.body, weight: .ultraLight))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 5)
+                        RoundedRectangle(cornerRadius: 5.0)
                             .stroke(.gray.opacity(0.2), lineWidth: 0.5)
                     )
             }
@@ -24,6 +24,7 @@ struct SongRow: View {
             VStack(alignment: .leading) {
                 Text(detail.name)
                     .lineLimit(1)
+                    .foregroundStyle(Color.label)
                 Text("\(detail.artist) — \(detail.album)")
                     .lineLimit(1)
                     .font(.footnote)
@@ -41,9 +42,9 @@ private extension Image {
         self
             .resizable()
             .scaledToFit()
-            .frame(width: missing ? 20 : 30, height: missing ? 20 : 30)
+            .frame(width: missing ? 20 : 40, height: missing ? 20 : 40)
             .padding(missing ? 10 : 0)
-            .clipShape(RoundedRectangle(cornerRadius: 25.0))
+            .clipShape(RoundedRectangle(cornerRadius: 5.0))
     }
 }
 
