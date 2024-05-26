@@ -169,6 +169,7 @@ final class MusicManager {
     }
 }
 
+@available(*, deprecated)
 extension URL {
     static let mp3 = URL(string: "https://lumaa.fr/static/unaccess/HIG.mp3")!
     static let wav = URL(string: "https://lumaa.fr/static/unaccess/DBM.wav")!
