@@ -92,13 +92,13 @@
 		B9C341322C01A69D00A59B25 /* Artisticly */ = {
 			isa = PBXGroup;
 			children = (
+				B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */,
 				B91E10D52C0270300070E9F1 /* Browser */,
 				B91E10D02C024AE00070E9F1 /* Views */,
 				B9C3414A2C01ED4300A59B25 /* Components */,
 				B9C341492C01ED3800A59B25 /* Music */,
 				B9C341462C01DF0400A59B25 /* Artisticly.entitlements */,
 				B9C341432C01CDCE00A59B25 /* Info.plist */,
-				B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */,
 				B91E10DC2C027F4B0070E9F1 /* Localizable.xcstrings */,
 				B9C341372C01A6A100A59B25 /* Assets.xcassets */,
 				B9C341392C01A6A100A59B25 /* Preview Content */,
