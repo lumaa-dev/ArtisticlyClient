@@ -1,6 +1,7 @@
 //Made by Lumaa
 
 import SwiftUI
+import SwiftData
 import AVFAudio
 
 @main
@@ -11,6 +12,7 @@ struct ArtisticlyApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: KnownLibrary.self)
     }
 }
 

@@ -9,6 +9,7 @@ final class MusicBrowser {
     var name: String
     var online: Bool
     var setup: Bool
+    var personal: Bool = false
     
     init() async throws {
         self.url = URL(string: UserDefaults.standard.string(forKey: "server") ?? "http://localhost:3000")!
@@ -28,6 +29,10 @@ final class MusicBrowser {
         try? await self.refreshStatus()
     }
     
+    func isPersonal(_ personal: Bool) {
+        self.personal = personal
+    }
+    
     func refreshStatus() async throws {
         if let data = try? await URLSession.shared.data(from: self.url).0 {
             if let json: [String: Any] = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
@@ -40,9 +45,21 @@ final class MusicBrowser {
         }
     }
     
+    func getVersions(completionHandler: (String, String) -> Void) async throws {
+        guard self.online else { throw ArtisticlyError("Cannot make API calls when URL isn't Artisticly") }
+        
+        if let data = try? await URLSession.shared.data(from: self.url).0 {
+            if let json: [String: Any] = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                let versions: [String: Any] = json["versions"] as! [String: Any]
+                
+                completionHandler("\(versions["server"] as! Int)", versions["client"] as! String)
+            }
+        }
+    }
+    
     /// Makes a GET call to the given Artisticly URL
-    func get<Entity : Decodable>(path: String = "/", queries: [URLQueryItem] = [], credential: String? = nil) async -> Entity {
-        guard self.online else { fatalError("Cannot make API calls when URL isn't Artisticly") }
+    func get<Entity : Decodable>(path: String = "/", queries: [URLQueryItem] = [], credential: String? = nil) async throws -> Entity {
+        guard self.online else { throw ArtisticlyError("Cannot make API calls when URL isn't Artisticly") }
         
         let url = URL(string: "\(self.url.absoluteString)\(path)") ?? self.url
         var fullUrl = URLRequest(url: url.addQueries(queries))
@@ -54,7 +71,6 @@ final class MusicBrowser {
         
         do {
             let data = try await URLSession.shared.data(for: fullUrl).0
-            print(String(data: data, encoding: .utf8) ?? "stuff, i guess?")
             let decoder = JSONDecoder()
             return try decoder.decode(Entity.self, from: data)
         } catch {
@@ -63,8 +79,16 @@ final class MusicBrowser {
         }
     }
     
-    func get<Entity : Decodable>(_ path: String = "/", queries: [URLQueryItem] = [], credential: String? = nil) async -> Entity {
-        return await self.get(path: path, queries: queries, credential: credential)
+    func get<Entity : Decodable>(_ path: String = "/", queries: [URLQueryItem] = [], credential: String? = nil) async throws -> Entity {
+        return try await self.get(path: path, queries: queries, credential: credential)
+    }
+}
+
+struct ArtisticlyError: Error {
+    let message: String
+    
+    init(_ message: String) {
+        self.message = message
     }
 }
 

@@ -170,3 +170,26 @@ struct VolumeSliderView: UIViewRepresentable {
     
     func updateUIView(_ view: MPVolumeView, context: Context) {}
 }
+
+extension MPVolumeView {
+    static func setVolume(_ volume: Float) -> Void {
+        let volumeView = MPVolumeView()
+        let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+            slider?.value = volume
+        }
+    }
+    
+    static func getVolume() -> Float {
+        var vol: Float = 0.0
+        let volumeView = MPVolumeView()
+        let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+            vol = slider?.value ?? 0.0
+        }
+        
+        return vol
+    }
+}

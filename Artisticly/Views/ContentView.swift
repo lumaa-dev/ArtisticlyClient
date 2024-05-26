@@ -1,8 +1,10 @@
 //Made by Lumaa
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext: ModelContext
     @State private var browser: MusicBrowser? = nil
     
     var body: some View {
@@ -15,13 +17,18 @@ struct ContentView: View {
         }
         .task {
             if let tempBrowser: MusicBrowser = try? await MusicBrowser() {
-                let res: CodeResponse = await tempBrowser.get(path: "/code")
-                
-                if !res.correct {
-                    UserDefaults.standard.removeObject(forKey: "code")
-                } else {
-                    self.browser = tempBrowser
-                    self.browser?.setup = true
+                do {
+                    let res: CodeResponse = try await tempBrowser.get(path: "/code")
+                    
+                    if !res.correct {
+                        UserDefaults.standard.removeObject(forKey: "code")
+                    } else {
+                        self.browser = tempBrowser
+                        self.browser?.setup = true
+                    }
+                } catch {
+                    self.browser = nil
+                    print(error)
                 }
             } else {
                 UserDefaults.standard.removeObject(forKey: "server")

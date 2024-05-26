@@ -25,10 +25,13 @@ struct SongRow: View {
                 Text(detail.name)
                     .lineLimit(1)
                     .foregroundStyle(Color.label)
-                Text("\(detail.artist) — \(detail.album)")
-                    .lineLimit(1)
-                    .font(.footnote)
-                    .foregroundStyle(Color.gray)
+                
+                if detail.artist.count > 0 && detail.album.count > 0 {
+                    Text("\(detail.artist) — \(detail.album)")
+                        .lineLimit(1)
+                        .font(.footnote)
+                        .foregroundStyle(Color.gray)
+                }
             }
             
             Spacer()
@@ -50,6 +53,6 @@ private extension Image {
 
 #Preview {
     List {
-        SongRow(detail: .init(name: "Song Name", artist: "Artist Name", album: "Album Name"))
+        SongRow(detail: .template)
     }
 }

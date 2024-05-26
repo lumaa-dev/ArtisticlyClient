@@ -123,6 +123,12 @@ final class MusicManager {
         isPlaying = false
     }
     
+    func stop() {
+        player.stop()
+        isPlaying = false
+        buffering = false
+    }
+    
     func play() {
         player.play()
         isPlaying = true
@@ -166,6 +172,8 @@ final class MusicManager {
             self.genre = genre
             self.artwork = artwork
         }
+        
+        static let template: Self = .init(name: "Song Name", artist: "Artist Name", album: "Album Name")
     }
 }
 

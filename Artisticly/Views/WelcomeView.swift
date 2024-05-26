@@ -1,9 +1,14 @@
 //Made by Lumaa
 
 import SwiftUI
+import SwiftData
 
 struct WelcomeView: View {
+    @Environment(\.modelContext) private var modelContext
+    
     @Binding var browser: MusicBrowser?
+    @State private var initBrowser: MusicBrowser?
+    @Query private var libraries: [KnownLibrary] = []
     
     @State private var serverUrl: String = "http://localhost:3000"
     @State private var acceptable: Bool = false
@@ -36,7 +41,9 @@ struct WelcomeView: View {
                                     let tempBrowser = await MusicBrowser(url: url)
                                     
                                     if tempBrowser.online {
+                                        tempBrowser.isPersonal(self.initBrowser == nil)
                                         self.browser = tempBrowser
+                                        
                                         withAnimation {
                                             acceptable = true
                                         }
@@ -52,23 +59,37 @@ struct WelcomeView: View {
                         }
                         .disabled(serverUrl.isEmpty || !serverUrl.lowercased().hasPrefix("http"))
                     } else {
-                        TextField("input.code", text: $code)
-                            .keyboardType(.asciiCapable)
+                        if initBrowser == nil {
+                            TextField("input.code", text: $code)
+                                .keyboardType(.asciiCapable)
+                        }
                         
                         Button {
                             guard let browser = self.browser else { return }
                             
                             Task {
-                                let res: CodeResponse = await browser.get(path: "/code", credential: code)
-                                
-                                if !res.correct {
+                                do {
+                                    let res: CodeResponse = try await browser.get(path: "/code", credential: code)
+                                    
+                                    if !res.correct {
+                                        code = ""
+                                        errStr = String(localized: "error.incorrect-code")
+                                    } else {
+                                        UserDefaults.standard.setValue(serverUrl, forKey: "server")
+                                        UserDefaults.standard.setValue(initBrowser == nil ? code : "N/A-ArtisticlyCode", forKey: "code")
+                                        
+                                        browser.setup = true
+                                        
+                                        let known: KnownLibrary = .init(name: browser.name, url: browser.url, code: code, personal: browser.personal)
+                                        
+                                        modelContext.insert(known)
+                                        
+                                        print("Setup succeeded")
+                                    }
+                                } catch {
                                     code = ""
-                                    errStr = String(localized: "error.incorrect-code")
-                                } else {
-                                    UserDefaults.standard.setValue(serverUrl, forKey: "server")
-                                    UserDefaults.standard.setValue(code, forKey: "code")
-                                    browser.setup = true
-                                    print("Setup succeeded")
+                                    errStr = String(localized: "error.unknown")
+                                    print(error)
                                 }
                             }
                         } label: {
@@ -79,6 +100,9 @@ struct WelcomeView: View {
             }
             .navigationTitle(Text("welcome.user"))
             .navigationBarTitleDisplayMode(.large)
+            .onAppear {
+                initBrowser = self.browser
+            }
         }
     }
 }

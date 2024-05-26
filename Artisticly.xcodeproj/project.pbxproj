@@ -14,6 +14,12 @@
 		B91E10D92C0276D30070E9F1 /* SongRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10D82C0276D30070E9F1 /* SongRow.swift */; };
 		B91E10DB2C027E480070E9F1 /* SongList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10DA2C027E480070E9F1 /* SongList.swift */; };
 		B91E10DD2C027F4B0070E9F1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B91E10DC2C027F4B0070E9F1 /* Localizable.xcstrings */; };
+		B91E10DF2C030F220070E9F1 /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10DE2C030F220070E9F1 /* NowPlayingView.swift */; };
+		B91E10E12C030FF10070E9F1 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10E02C030FF10070E9F1 /* ViewModifiers.swift */; };
+		B91E10E52C0321750070E9F1 /* ScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10E42C0321750070E9F1 /* ScrubberView.swift */; };
+		B91E10E72C032B880070E9F1 /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10E62C032B880070E9F1 /* MarqueeText.swift */; };
+		B91E10E92C03806F0070E9F1 /* LibrarySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10E82C03806F0070E9F1 /* LibrarySelector.swift */; };
+		B91E10EB2C03A8A60070E9F1 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10EA2C03A8A60070E9F1 /* DataContainer.swift */; };
 		B9C341342C01A69D00A59B25 /* ArtisticlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */; };
 		B9C341362C01A69D00A59B25 /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341352C01A69D00A59B25 /* DemoView.swift */; };
 		B9C341382C01A6A100A59B25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C341372C01A6A100A59B25 /* Assets.xcassets */; };
@@ -31,6 +37,12 @@
 		B91E10D82C0276D30070E9F1 /* SongRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongRow.swift; sourceTree = "<group>"; };
 		B91E10DA2C027E480070E9F1 /* SongList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongList.swift; sourceTree = "<group>"; };
 		B91E10DC2C027F4B0070E9F1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = Artisticly/Localizable.xcstrings; sourceTree = SOURCE_ROOT; };
+		B91E10DE2C030F220070E9F1 /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
+		B91E10E02C030FF10070E9F1 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
+		B91E10E42C0321750070E9F1 /* ScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrubberView.swift; sourceTree = "<group>"; };
+		B91E10E62C032B880070E9F1 /* MarqueeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeText.swift; sourceTree = "<group>"; };
+		B91E10E82C03806F0070E9F1 /* LibrarySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySelector.swift; sourceTree = "<group>"; };
+		B91E10EA2C03A8A60070E9F1 /* DataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
 		B9C341302C01A69D00A59B25 /* Artisticly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artisticly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtisticlyApp.swift; sourceTree = "<group>"; };
 		B9C341352C01A69D00A59B25 /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
@@ -61,6 +73,7 @@
 				B91E10D12C024AFD0070E9F1 /* ContentView.swift */,
 				B91E10D32C024C660070E9F1 /* WelcomeView.swift */,
 				B91E10DA2C027E480070E9F1 /* SongList.swift */,
+				B91E10DE2C030F220070E9F1 /* NowPlayingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -93,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */,
+				B91E10EA2C03A8A60070E9F1 /* DataContainer.swift */,
 				B91E10D52C0270300070E9F1 /* Browser */,
 				B91E10D02C024AE00070E9F1 /* Views */,
 				B9C3414A2C01ED4300A59B25 /* Components */,
@@ -129,6 +143,10 @@
 			children = (
 				B91E10D82C0276D30070E9F1 /* SongRow.swift */,
 				B9C341472C01E2B600A59B25 /* AirPlayButton.swift */,
+				B91E10E02C030FF10070E9F1 /* ViewModifiers.swift */,
+				B91E10E42C0321750070E9F1 /* ScrubberView.swift */,
+				B91E10E62C032B880070E9F1 /* MarqueeText.swift */,
+				B91E10E82C03806F0070E9F1 /* LibrarySelector.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -209,11 +227,17 @@
 				B9C341362C01A69D00A59B25 /* DemoView.swift in Sources */,
 				B9C341482C01E2B600A59B25 /* AirPlayButton.swift in Sources */,
 				B91E10DB2C027E480070E9F1 /* SongList.swift in Sources */,
+				B91E10E52C0321750070E9F1 /* ScrubberView.swift in Sources */,
 				B91E10D22C024AFD0070E9F1 /* ContentView.swift in Sources */,
 				B91E10D42C024C660070E9F1 /* WelcomeView.swift in Sources */,
+				B91E10E72C032B880070E9F1 /* MarqueeText.swift in Sources */,
+				B91E10E92C03806F0070E9F1 /* LibrarySelector.swift in Sources */,
+				B91E10DF2C030F220070E9F1 /* NowPlayingView.swift in Sources */,
 				B9C341342C01A69D00A59B25 /* ArtisticlyApp.swift in Sources */,
+				B91E10EB2C03A8A60070E9F1 /* DataContainer.swift in Sources */,
 				B9C341422C01A7A000A59B25 /* MusicManager.swift in Sources */,
 				B91E10D92C0276D30070E9F1 /* SongRow.swift in Sources */,
+				B91E10E12C030FF10070E9F1 /* ViewModifiers.swift in Sources */,
 				B91E10CF2C02283C0070E9F1 /* MusicBrowser.swift in Sources */,
 				B9C341452C01CE4200A59B25 /* NowPlaying.swift in Sources */,
 			);
@@ -366,7 +390,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.lumaa.Artisticly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -404,7 +428,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.lumaa.Artisticly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

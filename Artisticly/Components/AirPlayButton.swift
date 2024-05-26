@@ -6,6 +6,7 @@ import AVKit
 struct AirPlayButton: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let routePickerView = AVRoutePickerView()
+        routePickerView.activeTintColor = UIColor.white
         
         // Indicate whether your app prefers video content.
         routePickerView.prioritizesVideoDevices = false
