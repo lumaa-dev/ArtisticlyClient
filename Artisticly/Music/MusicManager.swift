@@ -101,6 +101,23 @@ final class MusicManager {
         }
     }
     
+    func play(at urlr: URLRequest) throws {
+        player.pause()
+        isPlaying = false
+        buffering = true
+        
+        Task {
+            self.songURL = urlr.url
+            let data = try await URLSession.shared.data(for: urlr).0
+            
+            player = try .init(data: data)
+            player.play()
+            
+            isPlaying = true
+            buffering = false
+        }
+    }
+    
     func pause() {
         player.pause()
         isPlaying = false

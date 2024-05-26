@@ -62,6 +62,10 @@ final class MusicBrowser {
             fatalError(error.localizedDescription)
         }
     }
+    
+    func get<Entity : Decodable>(_ path: String = "/", queries: [URLQueryItem] = [], credential: String? = nil) async -> Entity {
+        return await self.get(path: path, queries: queries, credential: credential)
+    }
 }
 
 extension Bool {
