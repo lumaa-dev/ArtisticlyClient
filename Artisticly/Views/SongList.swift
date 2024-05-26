@@ -37,7 +37,9 @@ struct SongList: View {
                         req.setValue((UserDefaults.standard.string(forKey: "code") ?? ""), forHTTPHeaderField: "Authorization")
                         
                         playingId = music.id
+                        
                         try? player.play(at: req)
+                        player.setNowPlayingInfo(with: music.songDetail)
                     } label: {
                         SongRow(detail: music.songDetail)
                     }
