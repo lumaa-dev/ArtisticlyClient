@@ -12,6 +12,8 @@
 		B91E10D42C024C660070E9F1 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10D32C024C660070E9F1 /* WelcomeView.swift */; };
 		B91E10D72C02703B0070E9F1 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10D62C02703B0070E9F1 /* Responses.swift */; };
 		B91E10D92C0276D30070E9F1 /* SongRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10D82C0276D30070E9F1 /* SongRow.swift */; };
+		B91E10DB2C027E480070E9F1 /* SongList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10DA2C027E480070E9F1 /* SongList.swift */; };
+		B91E10DD2C027F4B0070E9F1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B91E10DC2C027F4B0070E9F1 /* Localizable.xcstrings */; };
 		B9C341342C01A69D00A59B25 /* ArtisticlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */; };
 		B9C341362C01A69D00A59B25 /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341352C01A69D00A59B25 /* DemoView.swift */; };
 		B9C341382C01A6A100A59B25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C341372C01A6A100A59B25 /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 		B91E10D32C024C660070E9F1 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		B91E10D62C02703B0070E9F1 /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		B91E10D82C0276D30070E9F1 /* SongRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongRow.swift; sourceTree = "<group>"; };
+		B91E10DA2C027E480070E9F1 /* SongList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongList.swift; sourceTree = "<group>"; };
+		B91E10DC2C027F4B0070E9F1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = Artisticly/Localizable.xcstrings; sourceTree = SOURCE_ROOT; };
 		B9C341302C01A69D00A59B25 /* Artisticly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artisticly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtisticlyApp.swift; sourceTree = "<group>"; };
 		B9C341352C01A69D00A59B25 /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
@@ -56,6 +60,7 @@
 				B9C341352C01A69D00A59B25 /* DemoView.swift */,
 				B91E10D12C024AFD0070E9F1 /* ContentView.swift */,
 				B91E10D32C024C660070E9F1 /* WelcomeView.swift */,
+				B91E10DA2C027E480070E9F1 /* SongList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -94,6 +99,7 @@
 				B9C341462C01DF0400A59B25 /* Artisticly.entitlements */,
 				B9C341432C01CDCE00A59B25 /* Info.plist */,
 				B9C341332C01A69D00A59B25 /* ArtisticlyApp.swift */,
+				B91E10DC2C027F4B0070E9F1 /* Localizable.xcstrings */,
 				B9C341372C01A6A100A59B25 /* Assets.xcassets */,
 				B9C341392C01A6A100A59B25 /* Preview Content */,
 			);
@@ -169,6 +175,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = B9C341272C01A69D00A59B25;
 			productRefGroup = B9C341312C01A69D00A59B25 /* Products */;
@@ -187,6 +194,7 @@
 			files = (
 				B9C3413B2C01A6A100A59B25 /* Preview Assets.xcassets in Resources */,
 				B9C341382C01A6A100A59B25 /* Assets.xcassets in Resources */,
+				B91E10DD2C027F4B0070E9F1 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +208,7 @@
 				B91E10D72C02703B0070E9F1 /* Responses.swift in Sources */,
 				B9C341362C01A69D00A59B25 /* DemoView.swift in Sources */,
 				B9C341482C01E2B600A59B25 /* AirPlayButton.swift in Sources */,
+				B91E10DB2C027E480070E9F1 /* SongList.swift in Sources */,
 				B91E10D22C024AFD0070E9F1 /* ContentView.swift in Sources */,
 				B91E10D42C024C660070E9F1 /* WelcomeView.swift in Sources */,
 				B9C341342C01A69D00A59B25 /* ArtisticlyApp.swift in Sources */,
