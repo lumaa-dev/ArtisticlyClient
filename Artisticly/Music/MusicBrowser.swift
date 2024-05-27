@@ -82,6 +82,38 @@ final class MusicBrowser {
     func get<Entity : Decodable>(_ path: String = "/", queries: [URLQueryItem] = [], credential: String? = nil) async throws -> Entity {
         return try await self.get(path: path, queries: queries, credential: credential)
     }
+    
+    /// Makes a POST call to the given Artisticly URL
+    func post<Entity : Decodable>(path: String = "/", headers: [String: String] = [:], queries: [URLQueryItem] = [], credential: String? = nil) async throws -> Entity {
+        guard self.online else { throw ArtisticlyError("Cannot make API calls when URL isn't Artisticly") }
+        
+        let url = URL(string: "\(self.url.absoluteString)\(path)") ?? self.url
+        var fullUrl = URLRequest(url: url.addQueries(queries))
+        fullUrl.httpMethod = "POST"
+        
+        let authorization: String = credential == nil ? (UserDefaults.standard.string(forKey: "code") ?? "") : credential!
+        if authorization.count > 0 {
+            fullUrl.setValue(authorization, forHTTPHeaderField: "Authorization")
+        }
+        
+        for header in headers {
+            fullUrl.setValue(header.value, forHTTPHeaderField: header.key)
+        }
+        
+        do {
+            let data = try await URLSession.shared.data(for: fullUrl).0
+            print(String(data: data, encoding: .utf8))
+            let decoder = JSONDecoder()
+            return try decoder.decode(Entity.self, from: data)
+        } catch {
+            print(error)
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func post<Entity : Decodable>(_ path: String = "/", headers: [String: String] = [:], queries: [URLQueryItem] = [], credential: String? = nil) async throws -> Entity {
+        return try await self.post(path: path, headers: headers, queries: queries, credential: credential)
+    }
 }
 
 struct ArtisticlyError: Error {

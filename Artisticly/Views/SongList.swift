@@ -21,6 +21,12 @@ struct SongList: View {
     
     @State private var serverVersion: String = "?"
     
+    @State private var addingSongs: Bool = false
+    
+    @State private var spotifySheet: Bool = false
+    @State private var spotifyType: SpotifyType = .album
+    @State private var spotifyUrl: String = ""
+    
     var body: some View {
         NavigationStack {
             List {
@@ -127,6 +133,18 @@ struct SongList: View {
                 .modelContainer(DataContainer.shared.container)
                 .modelContext(DataContainer.shared.context)
                 .environment(\.modelContext, DataContainer.shared.context)
+                
+                Divider()
+                
+                Menu {
+                    Button {
+                        spotifySheet.toggle()
+                    } label: {
+                        Text(String("Spotify"))
+                    }
+                } label: {
+                    Label("add.song", systemImage: "plus.circle")
+                }
             }
             .alert("new.code", isPresented: $changingCode) {
                 TextField("input.new.code", text: $newCode)
@@ -189,6 +207,44 @@ struct SongList: View {
         .sheet(isPresented: $nowPlayingSheet) {
             NowPlayingView(detail: playingMusic)
         }
+        .sheet(isPresented: $spotifySheet) {
+            ZStack {
+                Form {
+                    Picker("spotify.type", selection: $spotifyType) {
+                        ForEach(SpotifyType.allCases, id: \.self) { type in
+                            Text(type.label)
+                                .id(type)
+                        }
+                    }
+                    .disabled(addingSongs)
+                    
+                    HStack {
+                        TextField(spotifyType.label, text: $spotifyUrl)
+                            .textContentType(.URL)
+                            .keyboardType(.URL)
+                            .disabled(addingSongs)
+                            .onSubmit {
+                                submitSong()
+                            }
+                        
+                        if !addingSongs {
+                            Button {
+                                submitSong()
+                            } label: {
+                                Image(systemName: "arrow.forward.to.line")
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .disabled(!spotifyUrl.lowercased().hasPrefix("https://open.spotify.com/\(spotifyType.rawValue)"))
+                        } else {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                        }
+                    }
+                }
+            }
+            .presentationDetents([.height(200)])
+            .presentationDragIndicator(.visible)
+        }
     }
     
     private func loadSongs() async {
@@ -224,6 +280,38 @@ struct SongList: View {
         } catch {
             print(error)
             fatalError(error.localizedDescription)
+        }
+    }
+    
+    private func submitSong() {
+        guard !addingSongs else { return }
+        
+        let url = spotifyUrl
+        spotifyUrl = ""
+        addingSongs.toggle()
+        
+        Task {
+            do {
+                let added: SpotifyAddedAlbum = try await browser.post("/spotify/album", queries: [.init(name: "link", value: url)])
+                
+                if added.success {
+                    spotifySheet.toggle()
+                    addingSongs.toggle()
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    enum SpotifyType: String, CaseIterable {
+        case album
+        
+        var label: String {
+            switch self {
+                case .album:
+                    return String(localized: "song.album")
+            }
         }
     }
 }

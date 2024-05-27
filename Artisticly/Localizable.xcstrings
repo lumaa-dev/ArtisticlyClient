@@ -33,6 +33,22 @@
         }
       }
     },
+    "add.song" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add songs"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter des musiques"
+          }
+        }
+      }
+    },
     "alt.servers" : {
       "localizations" : {
         "en" : {
@@ -362,6 +378,22 @@
         }
       }
     },
+    "song.album" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Album"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Album"
+          }
+        }
+      }
+    },
     "song.list-%@" : {
       "localizations" : {
         "en" : {
@@ -390,6 +422,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ma librairie"
+          }
+        }
+      }
+    },
+    "spotify.type" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type"
           }
         }
       }

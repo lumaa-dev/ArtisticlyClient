@@ -6,6 +6,16 @@ struct CodeResponse: Codable {
     let correct: Bool
 }
 
+struct SpotifyAdded: Codable {
+    let success: Bool
+    let newFile: String?
+}
+
+struct SpotifyAddedAlbum: Codable {
+    let success: Bool
+    let newFiles: [String]?
+}
+
 struct MusicResponse: Codable, Identifiable{
     let id: Int
     let metadata: Metadata
