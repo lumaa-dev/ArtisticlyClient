@@ -93,6 +93,7 @@ struct NowPlayingView: View {
                             .font(.title.bold())
                             .contentTransition(.symbolEffect(.replace.downUp.byLayer))
                     }
+                    .disabled(player.buffering)
                     
                     Spacer()
                 }

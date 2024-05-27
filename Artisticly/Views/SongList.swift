@@ -181,6 +181,7 @@ struct SongList: View {
                                 .contentTransition(.symbolEffect(.replace.downUp.byLayer))
                                 .padding(.trailing, 5)
                         }
+                        .disabled(player.buffering)
                     }
                     .overlay {
                         RoundedRectangle(cornerRadius: 7.5)
