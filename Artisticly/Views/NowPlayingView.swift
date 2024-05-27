@@ -19,11 +19,7 @@ struct NowPlayingView: View {
     @State private var deviceVolume: Double = 0.0
     
     var body: some View {
-        if isPortrait {
-            portrait
-        } else {
-            landscape
-        }
+        portrait
     }
     
     var landscape: some View {
