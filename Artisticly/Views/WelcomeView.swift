@@ -10,9 +10,9 @@ struct WelcomeView: View {
     @State private var initBrowser: MusicBrowser?
     @Query private var libraries: [KnownLibrary] = []
     
-    @State private var serverUrl: String = "http://localhost:3000"
+    @State private var serverUrl: String = ""
     @State private var acceptable: Bool = false
-    @State private var code: String = "Artisticly"
+    @State private var code: String = ""
     
     @State private var errStr: String? = nil
     
