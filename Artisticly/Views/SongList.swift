@@ -126,17 +126,18 @@ struct SongList: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(Text("song.list-\(browser.name)"))
             .toolbarTitleMenu {
-                LibrarySelector(browser: browser) { newBrowser in
-                    guard newBrowser.url != browser.url else { return }
-                    
-                    self.browser = newBrowser
-                    Task {
-                        await loadSongs()
-                    }
-                }
-                .modelContainer(DataContainer.shared.container)
-                .modelContext(DataContainer.shared.context)
-                .environment(\.modelContext, DataContainer.shared.context)
+                //TODO: Fix this, huge issues
+//                LibrarySelector(browser: browser) { newBrowser in
+//                    guard newBrowser.url != browser.url else { return }
+//                    
+//                    self.browser = newBrowser
+//                    Task {
+//                        await loadSongs()
+//                    }
+//                }
+//                .modelContainer(DataContainer.shared.container)
+//                .modelContext(DataContainer.shared.context)
+//                .environment(\.modelContext, DataContainer.shared.context)
                 
                 Divider()
                 
