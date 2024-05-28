@@ -273,6 +273,22 @@
         }
       }
     },
+    "no.songs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No songs yet"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pas encore de chansons"
+          }
+        }
+      }
+    },
     "offline.libs-%lld" : {
       "extractionState" : "stale",
       "localizations" : {
