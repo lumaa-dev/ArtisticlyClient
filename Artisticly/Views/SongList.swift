@@ -25,27 +25,31 @@ struct SongList: View {
     
     @State private var spotifySheet: Bool = false
     @State private var spotifyType: SpotifyType = .album
-    @State private var spotifyUrl: String = ""
+    @State private var spotifyUrl: String = "https://open.spotify.com/album/7faG9QpQLBUqG7JBZ4asdm?si=lXq89kyvSDSyMhPSho79kg"
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(musics) { music in
-                    Button {
-                        playingId = nil
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            var req = URLRequest(url: URL(string: "\(browser.url.absoluteString)/music/\(music.id)")!)
-                            req.setValue((UserDefaults.standard.string(forKey: "code") ?? ""), forHTTPHeaderField: "Authorization")
+                if musics.count > 0 {
+                    ForEach(musics) { music in
+                        Button {
+                            playingId = nil
                             
-                            playingId = music.id
-                            
-                            try? player.play(at: req)
-                            player.setNowPlayingInfo(with: music.songDetail)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                var req = URLRequest(url: URL(string: "\(browser.url.absoluteString)/music/\(music.id)")!)
+                                req.setValue((UserDefaults.standard.string(forKey: "code") ?? ""), forHTTPHeaderField: "Authorization")
+                                
+                                playingId = music.id
+                                
+                                try? player.play(at: req)
+                                player.setNowPlayingInfo(with: music.songDetail)
+                            }
+                        } label: {
+                            SongRow(detail: music.songDetail)
                         }
-                    } label: {
-                        SongRow(detail: music.songDetail)
                     }
+                } else {
+                    ContentUnavailableView("no.songs", systemImage: "xmark.circle")
                 }
             }
             .toolbar {
