@@ -72,6 +72,9 @@ final class MusicBrowser {
         do {
             let data = try await URLSession.shared.data(for: fullUrl).0
             let decoder = JSONDecoder()
+            if let string = String(data: data, encoding: .utf8) {
+                print(string.count > 100 ? string : "too long")
+            }
             return try decoder.decode(Entity.self, from: data)
         } catch {
             print(error)
@@ -102,8 +105,10 @@ final class MusicBrowser {
         
         do {
             let data = try await URLSession.shared.data(for: fullUrl).0
-            print(String(data: data, encoding: .utf8))
             let decoder = JSONDecoder()
+            if let string = String(data: data, encoding: .utf8) {
+                print(string.count > 100 ? string : "too long")
+            }
             return try decoder.decode(Entity.self, from: data)
         } catch {
             print(error)
