@@ -15,6 +15,9 @@ struct SongList: View {
     @State private var nowPlayingSheet: Bool = false
     @State private var playingId: Int? = nil
     @State private var musics: [MusicResponse] = []
+    @State private var occupied: Bool = false
+    @State private var hasMore: Bool = true
+    @State private var lastSeen: Int?
     
     @State private var changingCode: Bool = false
     @State private var newCode: String = ""
@@ -47,9 +50,25 @@ struct SongList: View {
                         } label: {
                             SongRow(detail: music.songDetail)
                         }
+                        .onAppear {
+                            lastSeen = music.id
+                            loadMoreSongs()
+                        }
                     }
                 } else {
                     ContentUnavailableView("no.songs", systemImage: "xmark.circle")
+                }
+                
+                if occupied && hasMore {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .listRowSeparator(.hidden)
+                            .listRowSpacing(10.0)
+                            .listRowBackground(Color.listBackground)
+                        Spacer()
+                    }
                 }
             }
             .toolbar {
@@ -126,18 +145,17 @@ struct SongList: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(Text("song.list-\(browser.name)"))
             .toolbarTitleMenu {
-                //TODO: Fix this, huge issues
-//                LibrarySelector(browser: browser) { newBrowser in
-//                    guard newBrowser.url != browser.url else { return }
-//                    
-//                    self.browser = newBrowser
-//                    Task {
-//                        await loadSongs()
-//                    }
-//                }
-//                .modelContainer(DataContainer.shared.container)
-//                .modelContext(DataContainer.shared.context)
-//                .environment(\.modelContext, DataContainer.shared.context)
+                LibrarySelector(browser: browser) { newBrowser in
+                    guard newBrowser.url != browser.url else { return }
+                    
+                    self.browser = newBrowser
+                    Task {
+                        await loadSongs()
+                    }
+                }
+                .modelContainer(DataContainer.shared.container)
+                .modelContext(DataContainer.shared.context)
+                .environment(\.modelContext, DataContainer.shared.context)
                 
                 Divider()
                 
@@ -258,7 +276,10 @@ struct SongList: View {
         do {
             try await browser.refreshStatus()
             if browser.online {
-                musics = try await browser.get("/musics")
+                let limit = 20
+                let page = 1
+                musics = try await browser.get("/musics", queries: [.init(name: "p", value: page), .init(name: "l", value: limit)])
+                hasMore = musics.count >= limit
                 
                 let ids = musics.map { $0.id }
                 if !ids.contains(playingId ?? -1) {
@@ -289,20 +310,48 @@ struct SongList: View {
         }
     }
     
+    private func loadMoreSongs() {
+        guard !occupied && hasMore && lastSeen ?? 0 == musics.count else { return }
+        
+        Task {
+            occupied = true
+            
+            if browser.online {
+                let limit = 20
+                let page = Int((lastSeen ?? 0) / limit) + 1 // gets the current page + 1
+                
+                let newSongs: [MusicResponse] = try await browser.get("/musics", queries: [.init(name: "p", value: page), .init(name: "l", value: limit)])
+                hasMore = newSongs.count >= limit
+                
+                musics.append(contentsOf: newSongs)
+                
+                let ids = musics.map { $0.id }
+                if !ids.contains(playingId ?? -1) {
+                    player.stop()
+                    playingId = nil
+                }
+            } else {
+                musics = []
+            }
+            
+            occupied = false
+        }
+    }
+    
     private func submitSong() {
         guard !addingSongs else { return }
         
         let url = spotifyUrl
-        spotifyUrl = ""
-        addingSongs.toggle()
+        addingSongs = true
         
         Task {
             do {
-                let added: SpotifyAddedAlbum = try await browser.post("/spotify/album", queries: [.init(name: "link", value: url)])
+                let added: SpotifyAddedAlbum = try await browser.post("/spotify/\(spotifyType)", queries: [.init(name: "link", value: url)])
                 
                 if added.success {
                     spotifySheet.toggle()
-                    addingSongs.toggle()
+                    spotifyUrl = ""
+                    addingSongs = false
                 }
             } catch {
                 print(error)
@@ -311,7 +360,7 @@ struct SongList: View {
     }
     
     enum SpotifyType: String, CaseIterable {
-        case album
+        case album = "album"
         
         var label: String {
             switch self {
