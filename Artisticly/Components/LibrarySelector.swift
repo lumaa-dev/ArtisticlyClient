@@ -18,7 +18,7 @@ struct LibrarySelector: View {
         self.libraries = (try? modelContext.fetch(FetchDescriptor<KnownLibrary>())) ?? []
         self.onChangeLibrary = onChangeLibrary
         
-//        self.checkup()
+        self.checkup()
     }
     
     private func checkup() {
@@ -26,7 +26,6 @@ struct LibrarySelector: View {
             for library in libraries {
                 let tempBrowser = await MusicBrowser(url: library.url)
                 if tempBrowser.online {
-                    print("lib of \(tempBrowser.name)")
                     self.onlineLibraries.append(library)
                 }
             }
@@ -52,11 +51,13 @@ struct LibrarySelector: View {
                             }
                         }
                     } label: {
-                        if browser.url == lib.url {
-                            Label(lib.label, systemImage: "checkmark")
-                        } else {
-                            Text(lib.label)
-                        }
+//                        if browser.url == lib.url {
+//                            Label(lib.label, systemImage: "checkmark")
+//                        } else {
+//                            Text(lib.label)
+//                        }
+                        
+                        Text(lib.label)
                     }
                     
                     if lib.personal {
