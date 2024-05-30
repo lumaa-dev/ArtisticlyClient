@@ -71,7 +71,7 @@ struct WelcomeView: View {
                                 do {
                                     let res: CodeResponse = try await browser.get(path: "/code", credential: code)
                                     
-                                    if !res.correct {
+                                    if !res.correct && initBrowser == nil {
                                         code = ""
                                         errStr = String(localized: "error.incorrect-code")
                                     } else {
@@ -80,7 +80,7 @@ struct WelcomeView: View {
                                         
                                         browser.setup = true
                                         
-                                        let known: KnownLibrary = .init(name: browser.name, url: browser.url, code: code, personal: browser.personal)
+                                        let known: KnownLibrary = .init(name: browser.name, url: browser.url, code: code, personal: initBrowser == nil)
                                         
                                         modelContext.insert(known)
                                         
