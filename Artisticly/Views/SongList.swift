@@ -81,6 +81,13 @@ struct SongList: View {
                         }
                         
                         Button(role: .destructive) {
+                            // S.O.S. code for removing bugged libraries
+//                            do {
+//                                try modelContext.delete(model: KnownLibrary.self)
+//                            } catch {
+//                                print(error)
+//                            }
+                            
                             if browser.personal {
                                 do {
                                     try modelContext.delete(model: KnownLibrary.self)
@@ -100,6 +107,7 @@ struct SongList: View {
                             } else {
                                 if let lib = libraries.filter({ $0.url == browser.url && $0.personal == false }).first {
                                     modelContext.delete(lib)
+                                    print("removed public server")
                                 }
                                 if let personal = libraries.filter({ $0.personal == true }).first {
                                     Task {
@@ -109,6 +117,7 @@ struct SongList: View {
                                         UserDefaults.standard.setValue(personal.url.absoluteString, forKey: "server")
                                         
                                         self.browser = tempBrowser
+                                        print("loaded personal server")
                                         
                                         await loadSongs()
                                     }
@@ -119,7 +128,6 @@ struct SongList: View {
                                     self.browser.setup = false
                                     self.browser.online = false
                                 }
-                                print("removed public server")
                             }
                         } label: {
                             Label("reset.server", systemImage: "trash")
