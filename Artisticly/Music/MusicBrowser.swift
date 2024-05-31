@@ -43,6 +43,8 @@ final class MusicBrowser {
                 }
             }
         }
+        
+        self.name = self.name.isEmpty ? "User" : self.name
     }
     
     func getVersions(completionHandler: (String, String) -> Void) async throws {
