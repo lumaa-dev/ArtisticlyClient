@@ -5,6 +5,9 @@ import SwiftData
 
 struct SongList: View {
     @Environment(\.modelContext) private var modelContext: ModelContext
+    @Environment(\.isSearching) private var isSearching: Bool
+    @Environment(\.dismissSearch) private var dismissSearch: DismissSearchAction
+    
     @Query private var libraries: [KnownLibrary] = []
     
     @State var browser: MusicBrowser
@@ -19,6 +22,9 @@ struct SongList: View {
     @State private var hasMore: Bool = true
     @State private var lastSeen: Int?
     
+    @State private var searchField: String = ""
+    @State private var searchType: SearchType = .titles
+    
     @State private var changingCode: Bool = false
     @State private var newCode: String = ""
     
@@ -28,7 +34,7 @@ struct SongList: View {
     
     @State private var spotifySheet: Bool = false
     @State private var spotifyType: SpotifyType = .album
-    @State private var spotifyUrl: String = "https://open.spotify.com/album/7faG9QpQLBUqG7JBZ4asdm?si=lXq89kyvSDSyMhPSho79kg"
+    @State private var spotifyUrl: String = "https://open.spotify.com/track/2UKARCqDrhkYDoVR4FN5Wi"
     
     var body: some View {
         NavigationStack {
@@ -153,28 +159,58 @@ struct SongList: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(Text("song.list-\(browser.name)"))
             .toolbarTitleMenu {
-                LibrarySelector(browser: browser) { newBrowser in
-                    guard newBrowser.url != browser.url else { return }
+                if !isSearching {
+                    LibrarySelector(browser: browser) { newBrowser in
+                        guard newBrowser.url != browser.url else { return }
+                        
+                        self.browser = newBrowser
+                        Task {
+                            await loadSongs()
+                        }
+                    }
+                    .modelContainer(DataContainer.shared.container)
+                    .modelContext(DataContainer.shared.context)
+                    .environment(\.modelContext, DataContainer.shared.context)
                     
-                    self.browser = newBrowser
+                    Divider()
+                    
+                    Menu {
+                        Button {
+                            spotifySheet.toggle()
+                        } label: {
+                            Text(String("Spotify"))
+                        }
+                    } label: {
+                        Label("add.song", systemImage: "plus.circle")
+                    }
+                }
+            }
+            .searchable(text: $searchField, prompt: "search.bar")
+            .searchSuggestions {
+                if musics.count > 0 {
+                    ForEach(musics.shuffled()[0...(musics.count <= 10 ? (musics.count - 1) : 10)]) { suggestion in
+                        Text("\(searchType == SearchType.titles ? suggestion.songDetail.name : suggestion.songDetail.album) — \(suggestion.songDetail.artist)")
+                            .searchCompletion(searchType == SearchType.titles ? suggestion.songDetail.name : suggestion.songDetail.album)
+                    }
+                }
+            }
+            .searchScopes($searchType) {
+                ForEach(SearchType.allCases, id: \.self) { type in
+                    type.label
+                        .id(type)
+                }
+            }
+            .onSubmit(of: .search) {
+                Task {
+                    await loadSongs(with: searchField, type: searchType)
+                    dismissSearch()
+                }
+            }
+            .onChange(of: searchField) { _, new in
+                if new.isEmpty {
                     Task {
                         await loadSongs()
                     }
-                }
-                .modelContainer(DataContainer.shared.container)
-                .modelContext(DataContainer.shared.context)
-                .environment(\.modelContext, DataContainer.shared.context)
-                
-                Divider()
-                
-                Menu {
-                    Button {
-                        spotifySheet.toggle()
-                    } label: {
-                        Text(String("Spotify"))
-                    }
-                } label: {
-                    Label("add.song", systemImage: "plus.circle")
                 }
             }
             .alert("new.code", isPresented: $changingCode) {
@@ -234,7 +270,9 @@ struct SongList: View {
             await refresh()
         }
         .task {
-            await loadSongs()
+            if !isSearching {
+                await loadSongs()
+            }
         }
         .sheet(isPresented: $nowPlayingSheet) {
             NowPlayingView(detail: playingMusic)
@@ -248,6 +286,7 @@ struct SongList: View {
                                 .id(type)
                         }
                     }
+                    .pickerStyle(.menu)
                     .disabled(addingSongs)
                     
                     HStack {
@@ -279,15 +318,52 @@ struct SongList: View {
         }
     }
     
-    private func loadSongs() async {
-        print(modelContext.autosaveEnabled)
+    private func loadSongs(with search: String? = nil, type: SearchType = .titles) async {
         do {
             try await browser.refreshStatus()
             if browser.online {
                 let limit = 20
                 let page = 1
-                musics = try await browser.get("/musics", queries: [.init(name: "p", value: page), .init(name: "l", value: limit)])
-                hasMore = musics.count >= limit
+                if let query = search {
+                    if hasMore {
+                        let searchResult: MusicSearch = try await browser.get("/musics", queries: [.init(name: "p", value: page), .init(name: "l", value: limit), .init(name: "q", value: query.lowercased()), .init(name: "type", value: type.rawValue)])
+                        hasMore = searchResult.count >= limit
+                        
+                        musics = searchResult.results
+                    } else {
+                        let searched: [SearchMusic] = musics.map({
+                            var searched: String = ""
+                            switch (type) {
+                                case .titles:
+                                    searched = $0.metadata.name
+                                case .artists:
+                                    searched = $0.metadata.artist
+                                case .albums:
+                                    searched = $0.metadata.album
+                            }
+                            
+                            return SearchMusic(id: $0.id, searched: searched)
+                        })
+                        
+                        let filtered: [SearchMusic] = searched.filter({ $0.searched.localizedCaseInsensitiveContains(query) })
+                        let ids: [Int] = filtered.map({ $0.id })
+                        let results: [MusicResponse] = musics.filter({ ids.contains($0.id) })
+                        hasMore = results.count >= limit
+                        
+                        if results.count <= 0 {
+                            let searchResult: MusicSearch = try await browser.get("/musics", queries: [.init(name: "p", value: page), .init(name: "l", value: limit), .init(name: "q", value: query.lowercased()), .init(name: "type", value: type.rawValue)])
+                            hasMore = searchResult.count >= limit
+                            
+                            musics = searchResult.results
+                            return
+                        }
+                        
+                        musics = results
+                    }
+                } else {
+                    musics = try await browser.get("/musics", queries: [.init(name: "p", value: page), .init(name: "l", value: limit)])
+                    hasMore = musics.count >= limit
+                }
                 
                 let ids = musics.map { $0.id }
                 if !ids.contains(playingId ?? -1) {
@@ -304,11 +380,14 @@ struct SongList: View {
     }
     
     private func refresh() async {
-        print(modelContext.autosaveEnabled)
+        musics = []
+        hasMore = true
         do {
             try await browser.refreshStatus()
             if browser.online {
+                let limit = 20
                 musics = try await browser.get("/musics")
+                hasMore = musics.count >= limit
             } else {
                 musics = []
             }
@@ -354,7 +433,7 @@ struct SongList: View {
         
         Task {
             do {
-                let added: SpotifyAddedAlbum = try await browser.post("/spotify/\(spotifyType)", queries: [.init(name: "link", value: url)])
+                let added: SpotifyAdded = try await browser.post("/spotify/\(spotifyType)", queries: [.init(name: "link", value: url)])
                 
                 if added.success {
                     spotifySheet.toggle()
@@ -369,13 +448,39 @@ struct SongList: View {
     
     enum SpotifyType: String, CaseIterable {
         case album = "album"
+        case track = "track"
         
         var label: String {
             switch self {
                 case .album:
                     return String(localized: "song.album")
+                case .track:
+                    return String(localized: "song.track")
             }
         }
+    }
+    
+    enum SearchType: String, CaseIterable {
+        case titles = "title"
+        case artists = "artist"
+        case albums = "albums"
+        
+        @ViewBuilder
+        var label: some View {
+            switch (self) {
+                case .titles:
+                    Label("search.type.title", systemImage: "square.text.square")
+                case .albums:
+                    Label("search.type.album", systemImage: "square.stack")
+                case .artists:
+                    Label("search.type.artist", systemImage: "person.crop.square")
+            }
+        }
+    }
+    
+    private struct SearchMusic {
+        let id: Int
+        let searched: String
     }
 }
 

@@ -8,15 +8,11 @@ struct CodeResponse: Codable {
 
 struct SpotifyAdded: Codable {
     let success: Bool
-    let newFile: String?
+    let newFile: String? // track
+    let newFiles: [String]? // album
 }
 
-struct SpotifyAddedAlbum: Codable {
-    let success: Bool
-    let newFiles: [String]?
-}
-
-struct MusicResponse: Codable, Identifiable{
+struct MusicResponse: Codable, Identifiable {
     let id: Int
     let metadata: Metadata
     
@@ -39,4 +35,9 @@ struct MusicResponse: Codable, Identifiable{
             self.artwork = Data(base64Encoded: artworkStr) ?? Data()
         }
     }
+}
+
+struct MusicSearch: Codable {
+    let results: [MusicResponse]
+    let count: Int
 }
