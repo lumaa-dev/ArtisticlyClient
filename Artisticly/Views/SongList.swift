@@ -52,9 +52,29 @@ struct SongList: View {
                                 
                                 try? player.play(at: req)
                                 player.setNowPlayingInfo(with: music.songDetail)
+                                
+                                MusicManager.shared.currentTime = 0
+                                MusicManager.shared.setNowPlayingPlaybackInfo(with: music.songDetail)
                             }
                         } label: {
                             SongRow(detail: music.songDetail)
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                let i = musics.firstIndex(where: { $0.id == music.id }) ?? -1
+                                musics.remove(at: i)
+                                
+                                Task {
+                                    do {
+                                        let _: SpotifyAdded = try await browser.delete("/music/\(music.id)")
+                                    } catch {
+                                        musics.insert(music, at: i)
+                                        print(error)
+                                    }
+                                }
+                            } label: {
+                                Label("delete", systemImage: "trash.fill")
+                            }
                         }
                         .onAppear {
                             lastSeen = music.id
@@ -77,6 +97,7 @@ struct SongList: View {
                     }
                 }
             }
+            .listStyle(.insetGrouped)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
@@ -88,11 +109,11 @@ struct SongList: View {
                         
                         Button(role: .destructive) {
                             // S.O.S. code for removing bugged libraries
-//                            do {
-//                                try modelContext.delete(model: KnownLibrary.self)
-//                            } catch {
-//                                print(error)
-//                            }
+                            //                              do {
+                            //                                  try modelContext.delete(model: KnownLibrary.self)
+                            //                              } catch {
+                            //                                  print(error)
+                            //                              }
                             
                             if browser.personal {
                                 do {
@@ -140,7 +161,7 @@ struct SongList: View {
                         }
                         
                         Divider()
-                            
+                        
                         Text(String("ArtisticlyServer v\(self.serverVersion)"))
                             .task {
                                 do {
@@ -157,7 +178,7 @@ struct SongList: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(Text("song.list-\(browser.name)"))
+            .navigationTitle(Text(browser.personal ? "song.my-list" : "song.list-\(browser.name)"))
             .toolbarTitleMenu {
                 if !isSearching {
                     LibrarySelector(browser: browser) { newBrowser in
@@ -186,14 +207,14 @@ struct SongList: View {
                 }
             }
             .searchable(text: $searchField, prompt: "search.bar")
-            .searchSuggestions {
-                if musics.count > 0 {
-                    ForEach(musics.shuffled()[0...(musics.count <= 10 ? (musics.count - 1) : 10)]) { suggestion in
-                        Text("\(searchType == SearchType.titles ? suggestion.songDetail.name : suggestion.songDetail.album) — \(suggestion.songDetail.artist)")
-                            .searchCompletion(searchType == SearchType.titles ? suggestion.songDetail.name : suggestion.songDetail.album)
-                    }
-                }
-            }
+//          .searchSuggestions {
+//              if musics.count > 0 {
+//                  ForEach(musics.shuffled()[0...(musics.count <= 10 ? (musics.count - 1) : 10)]) { suggestion in
+//                      Text("\(searchType == SearchType.titles ? suggestion.songDetail.name : suggestion.songDetail.album) — \(suggestion.songDetail.artist)")
+//                          .searchCompletion(searchType == SearchType.titles ? suggestion.songDetail.name : suggestion.songDetail.album)
+//                  }
+//              }
+//          }
             .searchScopes($searchType) {
                 ForEach(SearchType.allCases, id: \.self) { type in
                     type.label
@@ -275,7 +296,7 @@ struct SongList: View {
             }
         }
         .sheet(isPresented: $nowPlayingSheet) {
-            NowPlayingView(detail: playingMusic)
+            NowPlayingView(detail: playingMusic, browser: browser, songId: playingId ?? -1)
         }
         .sheet(isPresented: $spotifySheet) {
             ZStack {
@@ -460,27 +481,27 @@ struct SongList: View {
         }
     }
     
-    enum SearchType: String, CaseIterable {
-        case titles = "title"
-        case artists = "artist"
-        case albums = "albums"
-        
-        @ViewBuilder
-        var label: some View {
-            switch (self) {
-                case .titles:
-                    Label("search.type.title", systemImage: "square.text.square")
-                case .albums:
-                    Label("search.type.album", systemImage: "square.stack")
-                case .artists:
-                    Label("search.type.artist", systemImage: "person.crop.square")
-            }
-        }
-    }
-    
     private struct SearchMusic {
         let id: Int
         let searched: String
+    }
+}
+
+enum SearchType: String, CaseIterable {
+    case titles = "title"
+    case artists = "artist"
+    case albums = "albums"
+    
+    @ViewBuilder
+    var label: some View {
+        switch (self) {
+            case .titles:
+                Label("search.type.title", systemImage: "square.text.square")
+            case .albums:
+                Label("search.type.album", systemImage: "square.stack")
+            case .artists:
+                Label("search.type.artist", systemImage: "person.crop.square")
+        }
     }
 }
 

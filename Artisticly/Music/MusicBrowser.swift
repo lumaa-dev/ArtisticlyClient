@@ -121,6 +121,40 @@ final class MusicBrowser {
     func post<Entity : Decodable>(_ path: String = "/", headers: [String: String] = [:], queries: [URLQueryItem] = [], credential: String? = nil) async throws -> Entity {
         return try await self.post(path: path, headers: headers, queries: queries, credential: credential)
     }
+    
+    /// Makes a POST call to the given Artisticly URL
+    func delete<Entity : Decodable>(path: String = "/", headers: [String: String] = [:], queries: [URLQueryItem] = [], credential: String? = nil) async throws -> Entity {
+        guard self.online else { throw ArtisticlyError("Cannot make API calls when URL isn't Artisticly") }
+        
+        let url = URL(string: "\(self.url.absoluteString)\(path)") ?? self.url
+        var fullUrl = URLRequest(url: url.addQueries(queries))
+        fullUrl.httpMethod = "DELETE"
+        
+        let authorization: String = credential == nil ? (UserDefaults.standard.string(forKey: "code") ?? "") : credential!
+        if authorization.count > 0 {
+            fullUrl.setValue(authorization, forHTTPHeaderField: "Authorization")
+        }
+        
+        for header in headers {
+            fullUrl.setValue(header.value, forHTTPHeaderField: header.key)
+        }
+        
+        do {
+            let data = try await URLSession.shared.data(for: fullUrl).0
+            let decoder = JSONDecoder()
+            if let string = String(data: data, encoding: .utf8) {
+                print(string.count < 100 ? string : "too long")
+            }
+            return try decoder.decode(Entity.self, from: data)
+        } catch {
+            print(error)
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func delete<Entity : Decodable>(_ path: String = "/", headers: [String: String] = [:], queries: [URLQueryItem] = [], credential: String? = nil) async throws -> Entity {
+        return try await self.delete(path: path, headers: headers, queries: queries, credential: credential)
+    }
 }
 
 struct ArtisticlyError: Error {
