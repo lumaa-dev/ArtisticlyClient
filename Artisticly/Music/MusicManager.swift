@@ -137,13 +137,10 @@ final class MusicManager {
     /// Toggles on or off the "pause" feature accordingly
     func smartPause() {
          if player.isPlaying {
-            player.pause()
-            isPlaying = false
+             self.pause()
         } else {
-            player.play(atTime: TimeInterval(Int(player.deviceCurrentTime + 0.1)))
-            isPlaying = true
+            self.play()
         }
-        isPlaying = player.isPlaying
     }
     
     private func addTime(_ time: TimeInterval) {

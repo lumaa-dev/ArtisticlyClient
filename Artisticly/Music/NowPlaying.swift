@@ -17,7 +17,6 @@ enum NowPlayableCommand: CaseIterable {
 
 extension NowPlayableCommand {
     var remoteCommand: MPRemoteCommand {
-        
         let commandCenter = MPRemoteCommandCenter.shared()
         
         switch self {
@@ -89,6 +88,8 @@ extension MusicManager: NowPlayable {
     var supportedNowPlayableCommands: [NowPlayableCommand] {
         return [
             .togglePlayPause,
+            .pause,
+            .play,
             .nextTrack,
             .previousTrack,
             .changePlaybackPosition
@@ -111,6 +112,12 @@ extension MusicManager: NowPlayable {
         switch (type) {
             case .togglePlayPause:
                 self.smartPause()
+                return .success
+            case .play:
+                self.play()
+                return .success
+            case .pause:
+                self.pause()
                 return .success
             case .nextTrack:
                 return .noSuchContent
