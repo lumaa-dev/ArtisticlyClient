@@ -6,6 +6,7 @@ struct CodeResponse: Codable {
     let correct: Bool
 }
 
+// can also be used for delete action
 struct SpotifyAdded: Codable {
     let success: Bool
     let newFile: String? // track

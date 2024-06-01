@@ -4,6 +4,9 @@ import SwiftUI
 import SwiftData
 import AVFAudio
 
+// TODO: Use Focus filters with playlists
+// https://developer.apple.com/documentation/appintents/focus
+
 @main
 struct ArtisticlyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate: AppDelegate
