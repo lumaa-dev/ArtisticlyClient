@@ -178,6 +178,7 @@ struct VolumeSliderView: UIViewRepresentable {
     func updateUIView(_ view: MPVolumeView, context: Context) {}
 }
 
+#if os(iOS)
 extension MPVolumeView {
     static func setVolume(_ volume: Float) -> Void {
         let volumeView = MPVolumeView()
@@ -200,3 +201,4 @@ extension MPVolumeView {
         return vol
     }
 }
+#endif

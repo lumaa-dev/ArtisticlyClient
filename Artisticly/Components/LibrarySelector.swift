@@ -89,28 +89,3 @@ struct LibrarySelector: View {
         .environment(\.modelContext, DataContainer.shared.context)
     }
 }
-
-@Model
-class KnownLibrary: Identifiable, Hashable {
-    let id: UUID = UUID()
-    let name: String
-    let url: URL
-    let code: String
-    let personal: Bool
-    
-    var label: String {
-        return self.personal ? String(localized:"song.my-list") : String(localized:"song.list-\(self.name)")
-    }
-    
-    init(name: String, url: URL, code: String, personal: Bool = false) {
-        self.name = name
-        self.url = url
-        self.code = code
-        self.personal = personal
-    }
-    
-    static func defineAsCurrent(name: String) -> KnownLibrary {
-        let new: KnownLibrary = .init(name: name, url: URL(string: UserDefaults.standard.string(forKey: "server") ?? "")!, code: UserDefaults.standard.string(forKey: "code") ?? "")
-        return new
-    }
-}
