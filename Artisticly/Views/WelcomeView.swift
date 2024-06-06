@@ -99,6 +99,7 @@ struct WelcomeView: View {
                 }
             }
             .navigationTitle(Text("welcome.user"))
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 initBrowser = self.browser

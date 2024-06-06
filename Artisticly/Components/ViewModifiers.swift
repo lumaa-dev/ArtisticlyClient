@@ -49,13 +49,7 @@ extension View {
                     .frame(width: 35, height: 5, alignment: .center)
                     .safeAreaPadding()
                     .offset(y: -10.0)
-                    .background {
-                        Capsule(style: .circular)
-                            .frame(width: 35, height: 5, alignment: .center)
-                            .offset(y: -10.0)
-                            .foregroundStyle(Color.white.opacity(0.5))
-                    }
-                    .foregroundStyle(Material.ultraThin)
+                    .foregroundStyle(Color.white.opacity(0.9))
             }
     }
 }

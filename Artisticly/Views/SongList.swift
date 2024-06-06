@@ -53,7 +53,6 @@ struct SongList: View {
                                 try? player.play(at: req)
                                 player.setNowPlayingInfo(with: music.songDetail)
                                 
-                                MusicManager.shared.currentTime = 0
                                 MusicManager.shared.setNowPlayingPlaybackInfo(with: music.songDetail)
                             }
                         } label: {
