@@ -486,24 +486,6 @@ struct SongList: View {
     }
 }
 
-enum SearchType: String, CaseIterable {
-    case titles = "title"
-    case artists = "artist"
-    case albums = "albums"
-    
-    @ViewBuilder
-    var label: some View {
-        switch (self) {
-            case .titles:
-                Label("search.type.title", systemImage: "square.text.square")
-            case .albums:
-                Label("search.type.album", systemImage: "square.stack")
-            case .artists:
-                Label("search.type.artist", systemImage: "person.crop.square")
-        }
-    }
-}
-
 #Preview {
     ContentView()
 }

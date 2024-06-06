@@ -5,7 +5,6 @@ import SwiftData
 
 @main
 struct ArtisticlyTVApp: App {
-
     var body: some Scene {
         WindowGroup {
             ContentView()

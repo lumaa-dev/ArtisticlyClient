@@ -99,8 +99,9 @@ struct WelcomeView: View {
                 }
             }
             .navigationTitle(Text("welcome.user"))
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarTitleDisplayMode(.large)
+            #endif
             .onAppear {
                 initBrowser = self.browser
             }

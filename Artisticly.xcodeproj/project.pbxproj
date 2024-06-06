@@ -28,13 +28,18 @@
 		B9C341482C01E2B600A59B25 /* AirPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341472C01E2B600A59B25 /* AirPlayButton.swift */; };
 		B9F713462C1215E5009964E7 /* ArtisticlyTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F713452C1215E5009964E7 /* ArtisticlyTVApp.swift */; };
 		B9F713482C1215E5009964E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F713472C1215E5009964E7 /* ContentView.swift */; };
-		B9F7134A2C1215E5009964E7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F713492C1215E5009964E7 /* Item.swift */; };
 		B9F7134C2C1215E7009964E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9F7134B2C1215E7009964E7 /* Assets.xcassets */; };
 		B9F7134F2C1215E7009964E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9F7134E2C1215E7009964E7 /* Preview Assets.xcassets */; };
 		B9F713532C121601009964E7 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10EA2C03A8A60070E9F1 /* DataContainer.swift */; };
 		B9F713542C121635009964E7 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341412C01A7A000A59B25 /* MusicManager.swift */; };
 		B9F713552C121639009964E7 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341442C01CE4200A59B25 /* NowPlaying.swift */; };
 		B9F713562C12163C009964E7 /* MusicBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10CE2C02283C0070E9F1 /* MusicBrowser.swift */; };
+		B9F713582C12173E009964E7 /* SongList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F713572C12173E009964E7 /* SongList.swift */; };
+		B9F713592C12181E009964E7 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10D62C02703B0070E9F1 /* Responses.swift */; };
+		B9F7135C2C124106009964E7 /* SongRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10D82C0276D30070E9F1 /* SongRow.swift */; };
+		B9F7135E2C12414F009964E7 /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F7135D2C12414F009964E7 /* NowPlayingView.swift */; };
+		B9F713602C1242C0009964E7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B9F7135F2C1242C0009964E7 /* Localizable.xcstrings */; };
+		B9F713612C1243AF009964E7 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10D32C024C660070E9F1 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,9 +81,11 @@
 		B9F713432C1215E5009964E7 /* ArtisticlyTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtisticlyTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9F713452C1215E5009964E7 /* ArtisticlyTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtisticlyTVApp.swift; sourceTree = "<group>"; };
 		B9F713472C1215E5009964E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B9F713492C1215E5009964E7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B9F7134B2C1215E7009964E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9F7134E2C1215E7009964E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B9F713572C12173E009964E7 /* SongList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongList.swift; sourceTree = "<group>"; };
+		B9F7135D2C12414F009964E7 /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
+		B9F7135F2C1242C0009964E7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,7 +197,9 @@
 			children = (
 				B9F713452C1215E5009964E7 /* ArtisticlyTVApp.swift */,
 				B9F713472C1215E5009964E7 /* ContentView.swift */,
-				B9F713492C1215E5009964E7 /* Item.swift */,
+				B9F713572C12173E009964E7 /* SongList.swift */,
+				B9F7135D2C12414F009964E7 /* NowPlayingView.swift */,
+				B9F7135F2C1242C0009964E7 /* Localizable.xcstrings */,
 				B9F7134B2C1215E7009964E7 /* Assets.xcassets */,
 				B9F7134D2C1215E7009964E7 /* Preview Content */,
 			);
@@ -298,6 +307,7 @@
 			files = (
 				B9F7134F2C1215E7009964E7 /* Preview Assets.xcassets in Resources */,
 				B9F7134C2C1215E7009964E7 /* Assets.xcassets in Resources */,
+				B9F713602C1242C0009964E7 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,12 +341,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F713592C12181E009964E7 /* Responses.swift in Sources */,
 				B9F713482C1215E5009964E7 /* ContentView.swift in Sources */,
-				B9F7134A2C1215E5009964E7 /* Item.swift in Sources */,
 				B9F713562C12163C009964E7 /* MusicBrowser.swift in Sources */,
 				B9F713462C1215E5009964E7 /* ArtisticlyTVApp.swift in Sources */,
+				B9F7135E2C12414F009964E7 /* NowPlayingView.swift in Sources */,
+				B9F713582C12173E009964E7 /* SongList.swift in Sources */,
+				B9F713612C1243AF009964E7 /* WelcomeView.swift in Sources */,
 				B9F713532C121601009964E7 /* DataContainer.swift in Sources */,
 				B9F713542C121635009964E7 /* MusicManager.swift in Sources */,
+				B9F7135C2C124106009964E7 /* SongRow.swift in Sources */,
 				B9F713552C121639009964E7 /* NowPlaying.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,18 +561,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"ArtisticlyTV/Preview Content\"";
 				DEVELOPMENT_TEAM = HB5P3BML86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Artisticly;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.03;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.lumaa.ArtisticlyTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -575,18 +591,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"ArtisticlyTV/Preview Content\"";
 				DEVELOPMENT_TEAM = HB5P3BML86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Artisticly;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.03;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = fr.lumaa.ArtisticlyTV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;

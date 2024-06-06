@@ -1,6 +1,7 @@
 //Made by Lumaa
 
 import Foundation
+import SwiftUI
 import SwiftData
 import AVFoundation
 import CoreServices
@@ -197,6 +198,24 @@ class KnownLibrary: Identifiable, Hashable {
     static func defineAsCurrent(name: String) -> KnownLibrary {
         let new: KnownLibrary = .init(name: name, url: URL(string: UserDefaults.standard.string(forKey: "server") ?? "")!, code: UserDefaults.standard.string(forKey: "code") ?? "")
         return new
+    }
+}
+
+enum SearchType: String, CaseIterable {
+    case titles = "title"
+    case artists = "artist"
+    case albums = "albums"
+    
+    @ViewBuilder
+    var label: some View {
+        switch (self) {
+            case .titles:
+                Label("search.type.title", systemImage: "square.text.square")
+            case .albums:
+                Label("search.type.album", systemImage: "square.stack")
+            case .artists:
+                Label("search.type.artist", systemImage: "person.crop.square")
+        }
     }
 }
 

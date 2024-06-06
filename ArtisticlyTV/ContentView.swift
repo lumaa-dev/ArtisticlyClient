@@ -5,49 +5,30 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    
+    @State private var browser: MusicBrowser? = nil
+    @State private var fetching: Bool = false
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        ZStack {
+            if !fetching {
+                if let browser = self.browser, browser.setup {
+                    SongList(browser: browser)
+                } else {
+                    WelcomeView(browser: $browser)
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+            } else {
+                ProgressView()
+                    .progressViewStyle(.circular)
             }
         }
+        .ignoresSafeArea()
+        .background(Color.background) // force dark background
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+extension Color {
+    static let label: Color = Color(uiColor: UIColor.label)
+    static let background: Color = Color.black
+    static let listBackground: Color = Color.gray.opacity(0.4)
 }
