@@ -26,6 +26,15 @@
 		B9C341422C01A7A000A59B25 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341412C01A7A000A59B25 /* MusicManager.swift */; };
 		B9C341452C01CE4200A59B25 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341442C01CE4200A59B25 /* NowPlaying.swift */; };
 		B9C341482C01E2B600A59B25 /* AirPlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341472C01E2B600A59B25 /* AirPlayButton.swift */; };
+		B9F713462C1215E5009964E7 /* ArtisticlyTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F713452C1215E5009964E7 /* ArtisticlyTVApp.swift */; };
+		B9F713482C1215E5009964E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F713472C1215E5009964E7 /* ContentView.swift */; };
+		B9F7134A2C1215E5009964E7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F713492C1215E5009964E7 /* Item.swift */; };
+		B9F7134C2C1215E7009964E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9F7134B2C1215E7009964E7 /* Assets.xcassets */; };
+		B9F7134F2C1215E7009964E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9F7134E2C1215E7009964E7 /* Preview Assets.xcassets */; };
+		B9F713532C121601009964E7 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10EA2C03A8A60070E9F1 /* DataContainer.swift */; };
+		B9F713542C121635009964E7 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341412C01A7A000A59B25 /* MusicManager.swift */; };
+		B9F713552C121639009964E7 /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C341442C01CE4200A59B25 /* NowPlaying.swift */; };
+		B9F713562C12163C009964E7 /* MusicBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91E10CE2C02283C0070E9F1 /* MusicBrowser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,10 +73,23 @@
 		B9C341442C01CE4200A59B25 /* NowPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlaying.swift; sourceTree = "<group>"; };
 		B9C341462C01DF0400A59B25 /* Artisticly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Artisticly.entitlements; sourceTree = "<group>"; };
 		B9C341472C01E2B600A59B25 /* AirPlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPlayButton.swift; sourceTree = "<group>"; };
+		B9F713432C1215E5009964E7 /* ArtisticlyTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtisticlyTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9F713452C1215E5009964E7 /* ArtisticlyTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtisticlyTVApp.swift; sourceTree = "<group>"; };
+		B9F713472C1215E5009964E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B9F713492C1215E5009964E7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		B9F7134B2C1215E7009964E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9F7134E2C1215E7009964E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B9C3412D2C01A69D00A59B25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9F713402C1215E5009964E7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -100,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				B9C341322C01A69D00A59B25 /* Artisticly */,
+				B9F713442C1215E5009964E7 /* ArtisticlyTV */,
 				B9C341312C01A69D00A59B25 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				B9C341302C01A69D00A59B25 /* Artisticly.app */,
+				B9F713432C1215E5009964E7 /* ArtisticlyTV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +185,26 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		B9F713442C1215E5009964E7 /* ArtisticlyTV */ = {
+			isa = PBXGroup;
+			children = (
+				B9F713452C1215E5009964E7 /* ArtisticlyTVApp.swift */,
+				B9F713472C1215E5009964E7 /* ContentView.swift */,
+				B9F713492C1215E5009964E7 /* Item.swift */,
+				B9F7134B2C1215E7009964E7 /* Assets.xcassets */,
+				B9F7134D2C1215E7009964E7 /* Preview Content */,
+			);
+			path = ArtisticlyTV;
+			sourceTree = "<group>";
+		};
+		B9F7134D2C1215E7009964E7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B9F7134E2C1215E7009964E7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -182,6 +226,23 @@
 			productReference = B9C341302C01A69D00A59B25 /* Artisticly.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B9F713422C1215E5009964E7 /* ArtisticlyTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9F713522C1215E7009964E7 /* Build configuration list for PBXNativeTarget "ArtisticlyTV" */;
+			buildPhases = (
+				B9F7133F2C1215E5009964E7 /* Sources */,
+				B9F713402C1215E5009964E7 /* Frameworks */,
+				B9F713412C1215E5009964E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArtisticlyTV;
+			productName = ArtisticlyTV;
+			productReference = B9F713432C1215E5009964E7 /* ArtisticlyTV.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -193,6 +254,9 @@
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					B9C3412F2C01A69D00A59B25 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					B9F713422C1215E5009964E7 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 				};
@@ -212,6 +276,7 @@
 			projectRoot = "";
 			targets = (
 				B9C3412F2C01A69D00A59B25 /* Artisticly */,
+				B9F713422C1215E5009964E7 /* ArtisticlyTV */,
 			);
 		};
 /* End PBXProject section */
@@ -224,6 +289,15 @@
 				B9C3413B2C01A6A100A59B25 /* Preview Assets.xcassets in Resources */,
 				B9C341382C01A6A100A59B25 /* Assets.xcassets in Resources */,
 				B91E10DD2C027F4B0070E9F1 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9F713412C1215E5009964E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9F7134F2C1215E7009964E7 /* Preview Assets.xcassets in Resources */,
+				B9F7134C2C1215E7009964E7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +324,20 @@
 				B91E10E12C030FF10070E9F1 /* ViewModifiers.swift in Sources */,
 				B91E10CF2C02283C0070E9F1 /* MusicBrowser.swift in Sources */,
 				B9C341452C01CE4200A59B25 /* NowPlaying.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9F7133F2C1215E5009964E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9F713482C1215E5009964E7 /* ContentView.swift in Sources */,
+				B9F7134A2C1215E5009964E7 /* Item.swift in Sources */,
+				B9F713562C12163C009964E7 /* MusicBrowser.swift in Sources */,
+				B9F713462C1215E5009964E7 /* ArtisticlyTVApp.swift in Sources */,
+				B9F713532C121601009964E7 /* DataContainer.swift in Sources */,
+				B9F713542C121635009964E7 /* MusicManager.swift in Sources */,
+				B9F713552C121639009964E7 /* NowPlaying.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +541,62 @@
 			};
 			name = Release;
 		};
+		B9F713502C1215E7009964E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ArtisticlyTV/Preview Content\"";
+				DEVELOPMENT_TEAM = HB5P3BML86;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.03;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.lumaa.ArtisticlyTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Debug;
+		};
+		B9F713512C1215E7009964E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ArtisticlyTV/Preview Content\"";
+				DEVELOPMENT_TEAM = HB5P3BML86;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.03;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.lumaa.ArtisticlyTV;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 17.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -470,6 +614,15 @@
 			buildConfigurations = (
 				B9C3413F2C01A6A100A59B25 /* Debug */,
 				B9C341402C01A6A100A59B25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9F713522C1215E7009964E7 /* Build configuration list for PBXNativeTarget "ArtisticlyTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9F713502C1215E7009964E7 /* Debug */,
+				B9F713512C1215E7009964E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
