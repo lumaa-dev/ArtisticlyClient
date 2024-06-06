@@ -34,7 +34,7 @@ struct SongList: View {
     
     @State private var spotifySheet: Bool = false
     @State private var spotifyType: SpotifyType = .album
-    @State private var spotifyUrl: String = "https://open.spotify.com/track/2UKARCqDrhkYDoVR4FN5Wi"
+    @State private var spotifyUrl: String = ""
     
     var body: some View {
         NavigationStack {
