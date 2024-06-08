@@ -58,6 +58,13 @@ struct SongList: View {
                         } label: {
                             SongRow(detail: music.songDetail)
                         }
+                        #if os(iOS)
+                        .contextMenu {
+                            ShareLink(item: URL(string: "https://music.lumaa.fr/music/\(music.id)?url=\(browser.url)&code=\(UserDefaults.standard.string(forKey: "code") ?? "")&utm_source=artisticlyclient")!) {
+                                Label("share", systemImage: "square.and.arrow.up")
+                            }
+                        }
+                        #endif
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
                                 let i = musics.firstIndex(where: { $0.id == music.id }) ?? -1
