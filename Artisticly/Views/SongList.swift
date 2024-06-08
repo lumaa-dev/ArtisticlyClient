@@ -64,6 +64,7 @@ struct SongList: View {
                                 Label("share", systemImage: "square.and.arrow.up")
                             }
                         }
+                        .draggable(URL(string: "https://music.lumaa.fr/music/\(music.id)?url=\(browser.url)&code=\(UserDefaults.standard.string(forKey: "code") ?? "")&utm_source=artisticlyclient")!)
                         #endif
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
@@ -107,6 +108,12 @@ struct SongList: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
+                        ShareLink(item: URL(string: "https://music.lumaa.fr/?url=\(browser.url)")!) {
+                            Label("share.list", systemImage: "square.and.arrow.up")
+                        }
+                        
+                        Divider()
+                        
                         Button {
                             changingCode.toggle()
                         } label: {

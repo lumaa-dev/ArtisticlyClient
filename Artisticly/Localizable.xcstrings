@@ -490,6 +490,22 @@
         }
       }
     },
+    "share.list" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share library"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager la librairie"
+          }
+        }
+      }
+    },
     "song.album" : {
       "localizations" : {
         "en" : {
